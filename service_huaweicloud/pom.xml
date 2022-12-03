@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>cn.zvo.sms</groupId>
-	<artifactId>sms-parent</artifactId>
+	<artifactId>sms-service-huaweicloud</artifactId>
 	<version>1.0</version>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
-	<description>sms</description>
+	<description>java sms </description>
 	<url>https://github.com/xnx3/sms.java</url>
 
 	<licenses>
@@ -39,21 +39,11 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/xnx3/sms.git</connection>
-		<developerConnection>scm:git:ssh://github.com/xnx3/sms.git</developerConnection>
+		<connection>scm:git:git://github.com/xnx3/sms.java</connection>
+		<developerConnection>scm:git:ssh://github.com/xnx3/sms.java</developerConnection>
 		<url>github.com/xnx3/FileUpload</url>
 	</scm>
-	
-	<modules>
-		<!-- 核心支持 -->
-		<module>core</module>
-		
-		<!-- 短信服务通道 - sms.leimingyun.com -->
-		<module>service_sioo</module>
-		<!-- 短信服务通道 - 华为云 -->
-		<module>service_huaweicloud</module>
-    </modules>
-	
+
 	<build>
 		<plugins>
 			<!-- Source -->
@@ -76,7 +66,7 @@
 			</plugin>
 			
 			<!-- Javadoc -->
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.9.1</version>
@@ -92,7 +82,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 			
 			<!-- GPG -->
 			<!-- <plugin>
@@ -107,12 +97,30 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			 -->
+			</plugin>  -->
 		</plugins>
 	</build>
 	
-	<dependencies>
+	<dependencies>  
+		<dependency> 
+			<groupId>cn.zvo.sms</groupId>
+			<artifactId>sms-core</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.xnx3.json</groupId>
+			<artifactId>json</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.apache.httpcomponents</groupId>
+		  <artifactId>httpclient</artifactId>
+		  <version>4.5.13</version>
+		</dependency>
+		
 	</dependencies>
 	
 	<distributionManagement>
