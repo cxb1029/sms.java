@@ -7,7 +7,7 @@ import com.xnx3.BaseVO;
  * 短信服务的接口
  * @author 管雷鸣
  */
-public interface SmsInterface {
+public interface ServiceInterface {
 	
 	/**
 	 * 发送短信

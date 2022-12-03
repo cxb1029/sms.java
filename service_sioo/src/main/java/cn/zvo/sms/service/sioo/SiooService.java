@@ -8,14 +8,14 @@ import com.xnx3.MD5Util;
 import com.xnx3.StringUtil;
 import com.xnx3.net.HttpResponse;
 import com.xnx3.net.HttpsUtil;
-import cn.zvo.sms.SmsInterface;
+import cn.zvo.sms.ServiceInterface;
 
 /**
  * sioo短信发送服务
  * @author 管雷鸣
  *
  */
-public class SiooService implements SmsInterface{
+public class SiooService implements ServiceInterface{
 	private int uid;
 	private String password;
 	

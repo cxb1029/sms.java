@@ -13,21 +13,21 @@ public class Sms {
 	/**
 	 * 实现短信服务接口。如 华为云短信服务通道、阿里云短信服务通道……
 	 */
-	public SmsInterface smsInterface = null;
+	public ServiceInterface serviceInterface = null;
 	
 	/**
 	 * 初始化短信能力。
 	 * @param smsInterface 实现短信服务接口。如 华为云短信服务通道、阿里云短信服务通道……
 	 */
-	public Sms(SmsInterface smsInterface) {
-		this.smsInterface = smsInterface;
+	public Sms(ServiceInterface serviceInterface) {
+		this.serviceInterface = serviceInterface;
 	}
 	
-	public SmsInterface getSmsInterface() {
-		return smsInterface;
+	public ServiceInterface getServiceInterface() {
+		return serviceInterface;
 	}
-	public void setSmsInterface(SmsInterface smsInterface) {
-		this.smsInterface = smsInterface;
+	public void setServiceInterface(ServiceInterface serviceInterface) {
+		this.serviceInterface = serviceInterface;
 	}
 
 
@@ -46,7 +46,7 @@ public class Sms {
 	 * 		</ul>
 	 */
 	public BaseVO send(String phone, Map<String, String> params) {
-		return this.smsInterface.send(phone, params);
+		return this.serviceInterface.send(phone, params);
 	}
 
 	/**
@@ -59,6 +59,6 @@ public class Sms {
 	 * 		有的像是华为云等云平台，是按实际发送的量来收费的，也就是无剩余条数限制，此种场景 info 参数可以直接返回-1
 	 */
 	public BaseVO getBalance() {
-		return this.smsInterface.getBalance();
+		return this.serviceInterface.getBalance();
 	}
 }
