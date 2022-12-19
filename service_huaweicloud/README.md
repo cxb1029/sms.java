@@ -24,7 +24,7 @@ ServiceInterface service = new HuaweicloudService("appKey", "appSecret ", "sende
 Sms sms = new Sms(service); //创建短信发送类，指定使用哪个短信服务通道来实现短信发送
 Map<String, String> params = new HashMap<String, String>();
 params.put("templateId", "模板ID");
-params.put("templateParas", "[\"390673\"]");
+params.put("templateParams", "[\"390673\"]");
 sms.send("17000000000", params); //发送短信
 ````
 
@@ -32,8 +32,8 @@ sms.send("17000000000", params); //发送短信
 params 其map的传参有： 
 
 * ```` params.put("templateId", "模板ID"); ```` 
-* ```` params.put("templateParas", "模板变量"); ```` 选填。使用无变量模板时可不用传入此，也或者传入赋空字符串
-	* 单变量模板示例:模板内容为"您的验证码是${1}"时,templateParas可填写为 ["369751"]
+* ```` params.put("templateParams", "模板变量"); ```` 选填。使用无变量模板时可不用传入此，也或者传入赋空字符串
+	* 单变量模板示例:模板内容为"您的验证码是${1}"时,templateParams可填写为 ["369751"]
 	* 多变量模板示例:模板内容为"您有${1}件快递请到${2}领取"时,templateParams可填写为 ["3","人民公园正门"]
 
 模板中的每个变量都必须赋值，且取值不能为空。  
