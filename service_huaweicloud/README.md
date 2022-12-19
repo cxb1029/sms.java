@@ -9,10 +9,10 @@ java 发送短信，一行代码接入，可任意切换多家短信通道
 	<artifactId>sms-core</artifactId>
 	<version>1.0</version>
 </dependency>
-<!-- 使用 sioo的短信服务通道 -->
+<!-- 使用 华为云的短信服务通道 -->
 <dependency>
 	<groupId>cn.zvo.sms</groupId>
-	<artifactId>sms-service-sioo</artifactId>
+	<artifactId>sms-service-huaweicloud</artifactId>
 	<version>1.0</version>
 </dependency>
 ````
