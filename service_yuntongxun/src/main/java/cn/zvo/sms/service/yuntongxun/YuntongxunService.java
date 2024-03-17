@@ -1,11 +1,13 @@
 package cn.zvo.sms.service.yuntongxun;
 
 
+import cn.zvo.sms.ServiceInterface;
 import com.cloopen.rest.sdk.BodyType;
 import com.xnx3.BaseVO;
 
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -13,7 +15,7 @@ import java.util.Set;
  * @author 陈学斌
  *
  */
-public class YuntongxunService {
+public class YuntongxunService implements ServiceInterface {
 
 	private final String serverIp = "app.cloopen.com"; //生产环境请求地址：app.cloopen.com
 
@@ -25,26 +27,18 @@ public class YuntongxunService {
 
 	private String appId; //请使用管理控制台中已创建应用的APPID
 
-	private String phone; //手机号
-
-	private String templateId; //短信模板ID
-
 	/**
 	 * 初始化短信发送
 	 * @param accountSId 主账号,登陆云通讯网站后,可在控制台首页看到开发者主账号ACCOUNT SID
 	 * @param accountToken 主账号令牌AUTH TOKEN
 	 * @param appId 请使用管理控制台中已创建应用的APPID
-	 * @param phone 手机号
-	 * @param templateId 短信模板ID
 	 */
-	public YuntongxunService(String accountSId,String accountToken,String appId,String phone,String templateId) {
+	public YuntongxunService(String accountSId,String accountToken,String appId) {
 		this.accountSId = accountSId;
 		this.accountToken = accountToken;
 		this.appId = appId;
-		this.phone = phone;
-		this.templateId = templateId;
 	}
-	
+
 	/**
 	 * 发送短信接口
 	 * @param accountSId 主账号,登陆云通讯网站后,可在控制台首页看到开发者主账号ACCOUNT SID
@@ -52,22 +46,19 @@ public class YuntongxunService {
 	 * @param appId 请使用管理控制台中已创建应用的APPID
 	 * @param phone 手机号
 	 * @param templateId 短信模板ID
-	 * @param code 验证码
 	 * @return 结果
 	 */
-	public BaseVO send(YuntongxunService yuntongxunService) {
+	@Override
+	public BaseVO send(String phone, Map<String, String> params) {
+		String templateId = params.get("templateId");
+		String templateParams = params.get("templateParams");
 		CCPRestSmsSDK sdk = new CCPRestSmsSDK();
-		sdk.init(yuntongxunService.serverIp, yuntongxunService.serverPort);
-		sdk.setAccount(yuntongxunService.accountSId, yuntongxunService.accountToken);
-		sdk.setAppId(yuntongxunService.appId);
+		sdk.init(this.serverIp, this.serverPort);
+		sdk.setAccount(this.accountSId, this.accountToken);
+		sdk.setAppId(this.appId);
 		sdk.setBodyType(BodyType.Type_JSON);
-		String code = "";
-		for(int i=0;i<6;i++){
-			int random = (int)(Math.random()*10);
-			code += String.valueOf(random);
-		}
-		String[] datas = {code};
-		HashMap<String, Object> result = sdk.sendTemplateSMS(yuntongxunService.phone,yuntongxunService.templateId,datas);
+		String[] datas = {templateParams};
+		HashMap<String, Object> result = sdk.sendTemplateSMS(phone,templateId,datas);
 		if("000000".equals(result.get("statusCode"))){
 			//正常返回输出data包体信息（map）
 			HashMap<String,Object> data = (HashMap<String, Object>) result.get("data");
@@ -84,4 +75,8 @@ public class YuntongxunService {
 		return BaseVO.success();
 	}
 
+	@Override
+	public BaseVO getBalance() {
+		return null;
+	}
 }
