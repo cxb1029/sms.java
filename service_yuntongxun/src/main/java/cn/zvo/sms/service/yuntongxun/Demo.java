@@ -1,9 +1,11 @@
 package cn.zvo.sms.service.yuntongxun;
 
 
-import com.xnx3.BaseVO;
+import cn.zvo.sms.ServiceInterface;
+import cn.zvo.sms.Sms;
 
-
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -20,9 +22,12 @@ public class Demo {
 		String appId = "appId";
 		//手机号
 		String phone = "1352*******";
-		//模板ID
-		String templateId = "templateId";
-		YuntongxunService yuntongxunService = new YuntongxunService(accountSId, accountToken, appId, phone, templateId);
-		BaseVO baseVO = yuntongxunService.send(yuntongxunService);
+
+		ServiceInterface service = new YuntongxunService(accountSId, accountToken,appId); //创建短信服务通道
+		Sms sms = new Sms(service);
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("templateId", "模板ID");
+		params.put("templateParas", "[\"390673\"]");
+		sms.send(phone, params); //发送短信
 	}
 }
