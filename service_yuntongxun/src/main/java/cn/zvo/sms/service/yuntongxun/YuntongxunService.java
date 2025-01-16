@@ -33,10 +33,10 @@ public class YuntongxunService implements ServiceInterface {
 	 * @param accountToken 主账号令牌AUTH TOKEN
 	 * @param appId 请使用管理控制台中已创建应用的APPID
 	 */
-	public YuntongxunService(String accountSId,String accountToken,String appId) {
-		this.accountSId = accountSId;
-		this.accountToken = accountToken;
-		this.appId = appId;
+	public YuntongxunService(Map<String, String> map) {
+		this.accountSId = map.get("accountSId");
+		this.accountToken = map.get("accountToken");
+		this.appId = map.get("appId");
 	}
 
 	/**

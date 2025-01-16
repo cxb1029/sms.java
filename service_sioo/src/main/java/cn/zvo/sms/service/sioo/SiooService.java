@@ -33,11 +33,12 @@ public class SiooService implements ServiceInterface{
 	 * @param uid 用户在短信平台的uid（登录用户名）
 	 * @param password 用户在短信平台登录的密码
 	 */
-	public SiooService(String uid, String password) {
-		this.uid = Lang.stringToInt(uid, 0);
-		this.password = MD5Util.MD5(password);
+	public SiooService(Map<String, String> map) {
+		this.uid = Lang.stringToInt(map.get("uid"), 0);
+		this.password = MD5Util.MD5(map.get("password"));
 	}
-	
+
+
 	/**
 	 * @param phone 接收短信的手机号
 	 * @param params 其map的传参有： 

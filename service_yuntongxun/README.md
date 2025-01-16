@@ -20,7 +20,11 @@ java 发送短信，一行代码接入，可任意切换多家短信通道
 #### 2. Java代码
 
 ````
-ServiceInterface service = new YuntongxunService("accountSId", "accountToken","appId"); //创建短信服务通道
+Map<String, String> map = new HashedMap();
+map.put("accountSId",accountSId);
+map.put("accountToken",accountToken);
+map.put("appId",appId);
+ServiceInterface service = new YuntongxunService(map); //创建短信服务通道
 Sms sms = new Sms(service);
 Map<String, String> params = new HashMap<String, String>();
 params.put("templateId", "模板ID");
