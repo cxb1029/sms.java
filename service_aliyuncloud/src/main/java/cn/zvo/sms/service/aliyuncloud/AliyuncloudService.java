@@ -2,9 +2,11 @@ package cn.zvo.sms.service.aliyuncloud;
 
 
 import cn.zvo.sms.ServiceInterface;
+import com.aliyun.teaopenapi.models.Config;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.xnx3.BaseVO;
+import net.sf.json.JSONObject;
 
 
 import java.util.HashMap;
@@ -15,7 +17,7 @@ import java.util.Map;
  * @author 陈学斌
  *
  */
-public class aliyuncloudService implements ServiceInterface {
+public class AliyuncloudService implements ServiceInterface {
 
 	private String regionId; //机房信息
 
@@ -34,10 +36,14 @@ public class aliyuncloudService implements ServiceInterface {
 	 * @param accessKeyId Access Key Id ， 参见 https://ak-console.aliyun.com/?spm=#/accesskey
 	 * @param accessKeySecret Access Key Secret， 参见 https://ak-console.aliyun.com/?spm=#/accesskey
 	 */
-	public aliyuncloudService(String regionId, String accessKeyId, String accessKeySecret) {
-		this.regionId = regionId;
-		this.accessKeyId = accessKeyId;
-		this.accessKeySecret = accessKeySecret;
+	public AliyuncloudService(Map<String, String> map) {
+		this.regionId = map.get("regionId");
+		this.accessKeyId = map.get("accessKeyId");
+		this.accessKeySecret = map.get("accessKeySecret");
+	}
+
+	public AliyuncloudService(){
+
 	}
 
 	/**
@@ -87,16 +93,14 @@ public class aliyuncloudService implements ServiceInterface {
 			com.aliyun.teaopenapi.Client client = null;
 			// 工程代码泄露可能会导致 AccessKey 泄露，并威胁账号下所有资源的安全性。以下代码示例仅供参考。
 			// 建议使用更安全的 STS 方式，更多鉴权访问方式请参见：https://help.aliyun.com/document_detail/378657.html。
-			com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config()
-					// 必填，请确保代码运行环境设置了环境变量 ALIBABA_CLOUD_ACCESS_KEY_ID。
-					.setAccessKeyId(this.accessKeyId)
-					// 必填，请确保代码运行环境设置了环境变量 ALIBABA_CLOUD_ACCESS_KEY_SECRET。
-					.setAccessKeySecret(this.accessKeySecret);
+			// 必填，请确保代码运行环境设置了环境变量 ALIBABA_CLOUD_ACCESS_KEY_ID。
+			// 必填，请确保代码运行环境设置了环境变量 ALIBABA_CLOUD_ACCESS_KEY_SECRET。
+			Config config = (new Config()).setAccessKeyId(this.accessKeyId).setAccessKeySecret(this.accessKeySecret);
 			// Endpoint 请参考 https://api.aliyun.com/product/Dysmsapi
 			config.endpoint = this.regionId;
 			client = new com.aliyun.dysmsapi20170525.Client(config);
 
-			com.aliyun.teaopenapi.models.Params aliyunParams = aliyuncloudService.createApiInfo();
+			com.aliyun.teaopenapi.models.Params aliyunParams = AliyuncloudService.createApiInfo();
 			// query params
 			Map<String, Object> queries = new HashMap<>();
 			queries.put("PhoneNumbers", phone);
@@ -123,11 +127,10 @@ public class aliyuncloudService implements ServiceInterface {
 
 				// 查看是否发送成功
 				if (key.equals("body")){
-					Gson gson = new Gson();
-					JsonObject jsonObject = gson.fromJson(value.toString(), JsonObject.class);
-					String code = jsonObject.get("Code").getAsString();
+					JSONObject jsonObject = JSONObject.fromObject(value);
+					String code = jsonObject.getString("Code");
 					if (!code.equals("OK")){
-						return BaseVO.failure(jsonObject.get("Message").getAsString());
+						return BaseVO.failure(jsonObject.getString("Message"));
 					}
 				}
 

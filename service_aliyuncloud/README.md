@@ -20,7 +20,11 @@ java 发送短信，一行代码接入，可任意切换多家短信通道
 #### 2. Java代码
 
 ````
-ServiceInterface service = new aliyuncloudService("regionId", "accessKeyId","accessKeySecret"); //创建短信服务通道
+Map<String, String> map = new HashedMap();
+map.put("regionId",regionId);
+map.put("accessKeyId",accessKeyId);
+map.put("accessKeySecret",accessKeySecret);
+ServiceInterface service = new AliyuncloudService(map); //创建短信服务通道
 Sms sms = new Sms(service);
 Map<String, String> params = new HashMap<String, String>();
 params.put("signName", "阿里云短信测试");

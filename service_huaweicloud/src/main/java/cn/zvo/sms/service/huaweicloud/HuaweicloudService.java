@@ -20,7 +20,11 @@ public class HuaweicloudService implements ServiceInterface{
 	 * @param sender 国内短信签名通道号或国际/港澳台短信通道号
 	 * @param signature 短信签名
 	 */
-	public HuaweicloudService(String appKey, String appSecret, String sender, String signature) {
+	public HuaweicloudService(Map<String, String> map) {
+		String appKey = map.get("appKey");
+		String appSecret  = map.get("appSecret");
+		String sender  = map.get("sender");
+		String signature  = map.get("signature");
 		this.huaweiSMSUtil = new HuaweiSMSUtil(appKey, appSecret, sender, signature);
 	}
 	

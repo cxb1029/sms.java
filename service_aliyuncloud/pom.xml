@@ -6,7 +6,7 @@
 
 	<groupId>cn.zvo.sms</groupId>
 	<artifactId>sms-service-aliyuncloud</artifactId>
-	<version>1.0</version>
+	<version>1.1</version>
 	<packaging>jar</packaging>
 
 	<description>java sms </description>

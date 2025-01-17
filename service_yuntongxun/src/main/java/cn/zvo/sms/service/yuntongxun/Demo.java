@@ -3,6 +3,7 @@ package cn.zvo.sms.service.yuntongxun;
 
 import cn.zvo.sms.ServiceInterface;
 import cn.zvo.sms.Sms;
+import org.apache.commons.collections.map.HashedMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,11 @@ public class Demo {
 		//手机号
 		String phone = "1352*******";
 
-		ServiceInterface service = new YuntongxunService(accountSId, accountToken,appId); //创建短信服务通道
+		Map<String, String> map = new HashedMap();
+		map.put("accountSId",accountSId);
+		map.put("accountToken",accountToken);
+		map.put("appId",appId);
+		ServiceInterface service = new YuntongxunService(map); //创建短信服务通道
 		Sms sms = new Sms(service);
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("templateId", "模板ID");
