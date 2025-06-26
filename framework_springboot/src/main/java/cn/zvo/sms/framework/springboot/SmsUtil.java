@@ -23,7 +23,7 @@ import cn.zvo.sms.Sms;
 public class SmsUtil implements CommandLineRunner{
 	public static Sms sms;
     @Resource
-    private ApplicationConfig logApplicationConfig;
+    private ApplicationConfig smsApplicationConfig;
 
     /**
      * 加载配置 {@link ApplicationConfig} （aplication.properties/yml）文件的配置数据，通过其属性来决定使用何种配置。
@@ -37,7 +37,7 @@ public class SmsUtil implements CommandLineRunner{
     	}
     	
 		if(config.getService() != null) {
-			com.xnx3.Log.debug("load sms config by application.properties / yml : "+this.logApplicationConfig);
+			com.xnx3.Log.debug("load sms config by application.properties / yml : "+this.smsApplicationConfig);
 			
 			for (Map.Entry<String, Map<String, String>> entry : config.getService().entrySet()) {
 				//拼接，取该插件在哪个包
@@ -92,7 +92,7 @@ public class SmsUtil implements CommandLineRunner{
 		if(sms == null) {
 			sms = new Sms(null);
 		}
-    	loadConfig(this.logApplicationConfig); //加载application配置
+    	loadConfig(this.smsApplicationConfig); //加载application配置
 	}
 	
 
