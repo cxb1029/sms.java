@@ -15,7 +15,7 @@ springboot 项目中使用
 <dependency> 
 	<groupId>cn.zvo.sms</groupId>
 	<artifactId>sms-framework-springboot</artifactId>
-	<version>1.0</version>
+	<version>1.1</version>
 </dependency> 
 <!-- 加入华为云的短信通道  （使用哪种短信通道，这里artifactId就引入的哪里的 service_xxx -->
 <dependency>
